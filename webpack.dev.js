@@ -22,12 +22,7 @@ module.exports = {
                 {
                     test: /\.scss$/,
                     use: [ 'style-loader', 'css-loader', 'sass-loader' ]
-                },
-        //         {
-        //             test: REGEX_TO_MATCH_FILES ex. /\.js$/,
-        //             exclude: /node_modules/,
-        //             loader: ''
-        // }
+                }
         ]
     },
     plugins: [

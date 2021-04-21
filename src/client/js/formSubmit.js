@@ -9,8 +9,7 @@ function handleSubmit(e) {
             method: 'POST',
             mode: 'cors',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(url),
-            redirect: 'follow'
+            body: JSON.stringify(url)
         };
         fetch("http://localhost:8081/submit", requestOptions)
             .then((response)=> {

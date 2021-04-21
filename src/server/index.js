@@ -15,6 +15,7 @@ let baseURL = 'https://api.meaningcloud.com/sentiment-2.1'
 
 const app = express()
 app.use(bodyParser.json({ type: 'application/*+json' }))
+app.use(cors())
 app.use(express.static('dist'))
 
 
@@ -27,10 +28,10 @@ app.get('/', function (req, res) {
 })
 
 app.post('/submit', cors(), function(req, res){
-    console.log({url: req.body})
+    console.log({url: req.body.url})
     const formdata = new FormData();
     formdata.append("key", apiKey);
-    formdata.append("url", req.body);
+    formdata.append("txt", req.body.url);
     formdata.append("lang", "en");
 
 const requestOptions = {
@@ -40,11 +41,10 @@ const requestOptions = {
 };
 
 const response = fetch(baseURL, requestOptions)
-  .then(response => ({
-    status: response.status, 
-    body: response.json()
-  }))
-  .then(({ status, body }) => console.log(status, body))
+  .then(response => {
+    return response.json()
+  })
+  .then((data) => console.log(data))
   .catch(error => console.log('error', error));
 })
 // a route that handling post request for new URL that coming from the frontend
@@ -75,4 +75,4 @@ app.listen(PORT, (error) => {
     console.log(`Server listening on port ${PORT}!`)
 })
 
-// TODO: export app to use it in the unit testing
+module.exports = app

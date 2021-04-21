@@ -1,6 +1,9 @@
-// to solve ReferenceError: regeneratorRuntime is not defined
 import 'babel-polyfill'
+import {handleSubmit} from '../js/formSubmit'
 
 describe('Client Test', () => {
-    // TODO: add your test cases to test client
-})
+        test('Testing the handleSubmit function defined or not', () => {
+            const handleSubmitType = typeof handleSubmit
+            expect(handleSubmitType).toBe('function');
+    })
+})    
