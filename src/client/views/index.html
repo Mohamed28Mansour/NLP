@@ -9,19 +9,19 @@
     <main>
       <div class="container">
         <p>Enter a URL of an article / a blog to discover its sentiment.</p>
-        <section>
+        <section class="article-container">
             <label for="article-url">URL</label>
             <input id="article-url" type="text" name="input" value="" placeholder="Enter Article URL here" />
             <button
               type="submit"
-              class="btn-submit"
+              class="btn"
               onclick="return Client.handleSubmit(event)"
             >
               Submit
             </button>
         </section>
 
-        <section>
+        <section class="result-container">
           <strong>Form Results:</strong>
           <div id="text"></div>
           <div id="agreement"></div>

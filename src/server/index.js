@@ -14,13 +14,12 @@ let baseURL = 'https://api.meaningcloud.com/sentiment-2.1'
 
 
 const app = express()
-app.use(bodyParser.json({ type: 'application/*+json' }))
-app.use(cors())
 app.use(express.static('dist'))
 
+app.use(bodyParser.json({ type: 'application/*+json' }))
+app.use(bodyParser.urlencoded({ extended: false }));
 
-// TODO: Configure cors to avoid cors-origin issue
-// TODO: Configure express to use body-parser as middle-ware.
+app.use(cors())
 
 app.get('/', function (req, res) {
      res.sendFile('dist/index.html')

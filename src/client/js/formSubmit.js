@@ -11,7 +11,7 @@ function handleSubmit(e) {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(url)
         };
-        fetch("http://localhost:8081/submit", requestOptions)
+        fetch("http://localhost:8081/submit", {requestOptions})
             .then((response)=> {
                 console.log(response)
                 // document.getElementById('text').innerHTML = response.text

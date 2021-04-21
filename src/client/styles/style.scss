@@ -1,3 +1,60 @@
-body {
-    background-color: blue;
+$primary-font-size: 1rem;
+
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: turquoise;
+    min-height: 100vh;
+    align-content: center;
+    
+    p {
+        font: 2 * $primary-font-size bolder;
+        text-align: center;
+        padding-top: 5vh;
+        margin-top: 0;
+    }
+}
+
+.article-container,
+.result-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    height: 15rem;
+    padding-top: 5vh;
+    align-self: center;
+    border: whitesmoke;
+
+}
+
+.article-container {
+    label {
+        font: $primary-font-size bold;
+    };
+    input {
+        width: 50%;
+        border-radius: 2rem;
+        border: none;
+        opacity: 50%;
+        height: 10vh;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        padding-left: 2rem;
+        font:  $primary-font-size;
+
+        &:focus {
+            outline: none;
+        }
+    }
+    .btn {
+        width: 15rem;
+        border-radius: 0.5rem;
+        border: none;
+        padding: 1rem;
+
+        &:hover{
+            background-color: yellowgreen;
+        }
+    }
 }
