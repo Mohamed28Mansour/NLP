@@ -1,8 +1,8 @@
 var path = require('path')
 const express = require('express')
 const mockAPIResponse = require('./mockAPI.js')
-let bodyParser = require('body-parser')
-let cors = require('cors')
+const bodyParser = require('body-parser')
+const cors = require('cors')
 const dotenv = require('dotenv');
 dotenv.config();
 var FormData = require('form-data');
@@ -10,14 +10,14 @@ const fetch = require('node-fetch')
 
 const PORT = 8081
 const apiKey = process.env.API_KEY
-let baseURL = 'https://api.meaningcloud.com/sentiment-2.1'
+const baseURL = 'https://api.meaningcloud.com/sentiment-2.1'
 
 
 const app = express()
 app.use(express.static('dist'))
 
-app.use(bodyParser.json({ type: 'application/*+json' }))
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({ type: 'application/json' }))
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cors())
 
@@ -26,8 +26,8 @@ app.get('/', function (req, res) {
     // res.sendFile(path.resolve('src/client/views/index.html'))
 })
 
-app.post('/submit', cors(), function(req, res){
-    console.log({url: req.body.url})
+app.post('/submit', function(req, res){
+  console.log(url)
     const formdata = new FormData();
     formdata.append("key", apiKey);
     formdata.append("txt", req.body.url);
@@ -43,26 +43,18 @@ const response = fetch(baseURL, requestOptions)
   .then(response => {
     return response.json()
   })
-  .then((data) => console.log(data))
+  .then((data) => {
+    const result = {
+      text: data[0].text,
+      score_tag: data.score_tag,
+      agreement: data.agreement,
+      subjectivity: data.subjectivity,
+      confidence: data.confidence,
+      irony: data.irony
+    }
+  })
   .catch(error => console.log('error', error));
 })
-// a route that handling post request for new URL that coming from the frontend
-/* TODO:
-    1. GET the url from the request body
-    2. Build the URL it should be something like `${BASE_API_URL}?key=${MEAN_CLOUD_API_KEY}&url=${req.body.url}&lang=en`
-    3. Fetch Data from API
-    4. Send it to the client
-    5. REMOVE THIS TODO AFTER DOING IT 😎😎
-    server sends only specified data to the client with below codes
-     const sample = {
-       text: '',
-       score_tag : '',
-       agreement : '',
-       subjectivity : '',
-       confidence : '',
-       irony : ''
-     }
-*/
 
 app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
