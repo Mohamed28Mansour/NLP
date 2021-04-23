@@ -27,6 +27,9 @@ app.get('/', function (req, res) {
 })
 
 app.post('/submit', function(req, res){
+  const url = async () => {
+    await req.body.url
+  }
     const formdata = new FormData();
     formdata.append("key", apiKey);
     formdata.append("txt", req.body.url);
