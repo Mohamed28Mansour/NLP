@@ -17,7 +17,7 @@ const app = express()
 app.use(express.static('dist'))
 
 app.use(bodyParser.json({ type: 'application/json' }))
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors())
 
@@ -27,12 +27,10 @@ app.get('/', function (req, res) {
 })
 
 app.post('/submit', function(req, res){
-  const url = async () => {
-    await req.body.url
-  }
+  // console.log(req.body.url)
     const formdata = new FormData();
     formdata.append("key", apiKey);
-    formdata.append("txt", req.body.url);
+    formdata.append("url", req.body.url);
     formdata.append("lang", "en");
 
 const requestOptions = {
@@ -47,26 +45,23 @@ const response = fetch(baseURL, requestOptions)
   })
   .then((data) => {
     const result = {
-      text: data[0].text,
+      text: data.sentence_list[0].text,
       score_tag: data.score_tag,
       agreement: data.agreement,
       subjectivity: data.subjectivity,
       confidence: data.confidence,
       irony: data.irony
     }
+    // console.log(result)
     res.json(result)
   })
   .catch(error => console.log('error', error));
-})
-
-app.get('/test', function (req, res) {
-    res.send(mockAPIResponse)
 })
 
 // designates what port the app will listen to for incoming requests
 app.listen(PORT, (error) => {
     if (error) throw new Error(error)
     console.log(`Server listening on port ${PORT}!`)
-})
+  })
 
 module.exports = app

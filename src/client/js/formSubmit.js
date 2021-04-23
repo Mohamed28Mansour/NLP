@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 function handleSubmit(e) {
     e.preventDefault();
 
@@ -5,26 +7,25 @@ function handleSubmit(e) {
 
     if (Client.urlChecker(url)){
 
-        const requestOptions = {
-            method: 'POST',
-            credentials: 'same-origin',
-            mode: 'no-cors',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(url)
-        };
-        console.log(requestOptions)
+        // const requestOptions = {
+        //     method: 'POST',
+        //     credentials: 'same-origin',
+        //     mode: 'no-cors',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({url: url})
+        // };
 
-        fetch("http://localhost:8081/submit", requestOptions)
+        axios.post("http://localhost:8081/submit", {url})
             .then((response)=> {
-                console.log(response)
-                document.getElementById('text').innerHTML = response.text
-                document.getElementById('agreement').innerHTML = response.agreement
-                document.getElementById('subjectivity').innerHTML = response.subjectivity
-                document.getElementById('confidence').innerHTML = response.confidence
-                document.getElementById('irony').innerHTML = response.irony
-                document.getElementById('score_tag').innerHTML = response.score_tag        
+                // console.log(response)
+                document.getElementById('text').innerHTML = response.data.text
+                document.getElementById('agreement').innerHTML = response.data.agreement
+                document.getElementById('subjectivity').innerHTML = response.data.subjectivity
+                document.getElementById('confidence').innerHTML = response.data.confidence
+                document.getElementById('irony').innerHTML = response.data.irony
+                document.getElementById('score_tag').innerHTML = response.data.score_tag        
 
             })
             .catch((err) => {
