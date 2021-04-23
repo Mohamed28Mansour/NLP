@@ -27,7 +27,6 @@ app.get('/', function (req, res) {
 })
 
 app.post('/submit', function(req, res){
-  console.log(url)
     const formdata = new FormData();
     formdata.append("key", apiKey);
     formdata.append("txt", req.body.url);
@@ -52,6 +51,7 @@ const response = fetch(baseURL, requestOptions)
       confidence: data.confidence,
       irony: data.irony
     }
+    res.json(result)
   })
   .catch(error => console.log('error', error));
 })

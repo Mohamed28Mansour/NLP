@@ -8,7 +8,7 @@ function handleSubmit(e) {
         const requestOptions = {
             method: 'POST',
             credentials: 'same-origin',
-            mode: 'cors',
+            mode: 'no-cors',
             headers: {
                 'Content-Type': 'application/json'
             },
