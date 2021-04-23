@@ -36,8 +36,8 @@ $primary-font-size: 1rem;
         width: 50%;
         border-radius: 2rem;
         border: none;
-        opacity: 50%;
         height: 10vh;
+        background-color: white;
         margin-top: 1rem;
         margin-bottom: 1rem;
         padding-left: 2rem;
@@ -55,6 +55,9 @@ $primary-font-size: 1rem;
 
         &:hover{
             background-color: yellowgreen;
+        }
+        &:focus {
+            outline: none;
         }
     }
 }
