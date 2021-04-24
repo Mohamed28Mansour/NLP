@@ -5,7 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const WorkboxPlugin = require('workbox-webpack-plugin');
 
 module.exports = {
-    entry: './src/client/index.js',
+    entry: path.resolve(__dirname, 'src/client/index.js'),
     mode: 'development',
     devtool: 'source-map',
     output: {
@@ -27,8 +27,8 @@ module.exports = {
     },
     plugins: [
         new HtmlWebPackPlugin({
-            template: './src/client/views/index.html',
-            filename: './index.html'
+            template: path.resolve(__dirname, 'src/client/views/index.html'),
+            filename: path.resolve(__dirname, 'dist/index.html'),
         }),
         new CleanWebpackPlugin({
             dry: true,
